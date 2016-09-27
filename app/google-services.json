@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "642182419044",
+    "firebase_url": "https://home-inventory-app-61d05.firebaseio.com",
+    "project_id": "home-inventory-app-61d05",
+    "storage_bucket": "home-inventory-app-61d05.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:642182419044:android:754378dd74ad078b",
+        "android_client_info": {
+          "package_name": "com.projectmanagement.benson.homeinventoryapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "642182419044-ds2e928itkjf47gupuemhi90v2dpotr0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.projectmanagement.benson.homeinventoryapp",
+            "certificate_hash": "63D53EF663EE7B434BC2BC3546980D52F4618591"
+          }
+        },
+        {
+          "client_id": "642182419044-ubaa5u29lkuqlf4sc7g6ab03hf85o4gf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8PhxK6QVVaQGq7Qy85BzqDnJ3eGvWk4A"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "642182419044-ubaa5u29lkuqlf4sc7g6ab03hf85o4gf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
