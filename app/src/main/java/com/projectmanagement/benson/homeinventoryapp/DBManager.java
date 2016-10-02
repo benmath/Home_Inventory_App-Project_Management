@@ -2,12 +2,15 @@ package com.projectmanagement.benson.homeinventoryapp;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,6 +23,7 @@ class DBManager {
 
     private DatabaseReference mDatabase;
     private FirebaseDatabase db = FirebaseDatabase.getInstance();
+    private ChildEventListener itemFieldListener;
     private FirebaseUser user;
 
     DBManager() {
@@ -35,24 +39,6 @@ class DBManager {
     String getUserID(){
         return user.getUid();
     }
-
-    /*
-
-
-    private String itemName;
-    private String brand;
-    private String model;
-    private String serialNumber;
-    private String type;
-    private String loc;
-    private String locDescription;
-    private Date datePurch;
-    private float price;
-    private Date expireDate;
-    private String condition;
-    private String notes;
-
-    */
 
     void addItemToDB(Item item) {
         DatabaseReference newItem = mDatabase.child("user-items").child(getUserID()).push();
@@ -70,7 +56,6 @@ class DBManager {
         newItem.child("condition").setValue(item.getCondition());
         newItem.child("notes").setValue(item.getNotes());
     }
-
 
     void updateItemToDB(Item item){
         String key = mDatabase.child("items").push().getKey();

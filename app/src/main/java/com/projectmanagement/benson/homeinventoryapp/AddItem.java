@@ -93,7 +93,10 @@ public class AddItem extends AppCompatActivity {
         item.setType(et_type.getText().toString().trim());
         item.setLocDescription(et_locDesc.getText().toString());
         item.setDatePurch(et_datePurch.getText().toString().trim());
-        item.setPrice(et_price.getText().toString().trim());
+        if (!et_price.getText().toString().trim().equals(""))
+            item.setPrice(Double.parseDouble(et_price.getText().toString().trim()));
+        else
+            item.setPrice(0);
         item.setExpireDate(et_expireDate.getText().toString().trim());
         item.setNotes(et_notes.getText().toString());
 

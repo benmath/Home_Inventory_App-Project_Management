@@ -1,12 +1,15 @@
 package com.projectmanagement.benson.homeinventoryapp;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.firebase.ui.database.FirebaseListAdapter;
+import com.google.firebase.database.Query;
 
 import java.util.ArrayList;
 
@@ -14,22 +17,19 @@ import java.util.ArrayList;
  * Created by Benson on 10/1/2016.
  */
 
-public class ItemListAdapter extends ArrayAdapter<Item> {
-    public ItemListAdapter(Context context, ArrayList<Item> itemName) {
-        super(context, R.layout.item_list_row, itemName);
+public class ItemListAdapter extends FirebaseListAdapter<Item> {
+    // The mUsername for this client. We use this to indicate the name of the item
+    private String itemName;
+
+    public ItemListAdapter(Query ref, Activity activity, int layout, String name) {
+        super(activity, Item.class, layout, ref);
+        itemName = name;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-
-        LayoutInflater myInflater = LayoutInflater.from(getContext());
-        View customView = myInflater.inflate(R.layout.item_list_row, parent, false); //set it to false if not to inflate to parent
-
-        Item item = getItem(position);
-        TextView tutorName = (TextView) customView.findViewById(R.id.tv_itemListName);
-
-        tutorName.setText(item.getItemName());
-
-        return customView;
+    protected void populateView(View v, Item model, int position) {
+        TextView tv_itemListName = (TextView) v.findViewById(R.id.tv_itemListName);
+        tv_itemListName.setText(model.getItemName());
     }
+
 }

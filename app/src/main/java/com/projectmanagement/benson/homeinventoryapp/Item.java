@@ -27,6 +27,7 @@ class Item {
     private String notes;
 
     public Item() {
+
     }
 
     public String getBrand() {
@@ -109,20 +110,6 @@ class Item {
         this.price = price;
     }
 
-    void setPrice(String s) {
-        System.out.println("Price: " + s);
-        if(!s.equals("")) {
-            try {
-                price = Double.parseDouble(s);
-            } catch (NumberFormatException e) {
-                System.err.println("CANNOT PARSE THIS KUNTHUM STRING!!!!!!!");
-                price = 0;
-            }
-        }
-        else
-            price = 0;
-    }
-
     public String getSerialNumber() {
         return serialNumber;
     }
@@ -138,6 +125,7 @@ class Item {
     void setType(String type) {
         this.type = type;
     }
+
 
     /*
     private String stringToSqlDate(String date) {
@@ -155,21 +143,36 @@ class Item {
     @Exclude
     Map<String, Object> toMap() {
         HashMap<String, Object> item = new HashMap<>();
-        DBManager db = new DBManager();
 
-        item.put("uid", db.getUserID());
         item.put("itemName", itemName);
         item.put("brand", brand);
         item.put("serialNumber", serialNumber);
         item.put("type", type);
         item.put("loc", loc);
-        item.put("locDes", locDescription);
+        item.put("locDescription", locDescription);
         item.put("datePurch", datePurch);
         item.put("price", price);
-        item.put("expDate", expireDate);
-        item.put("cond", condition);
+        item.put("expireDate", expireDate);
+        item.put("condition", condition);
         item.put("notes", notes);
 
         return item;
+    }
+
+    void setMap(Map<String, String> map) {
+        itemName = map.get("itemName");
+        brand = map.get("brand");
+        serialNumber = map.get("serialNumber");
+        type = map.get("type");
+        loc = map.get("loc");
+        locDescription = map.get("locDescription");
+        datePurch = map.get("datePruch");
+        if(!map.get("price").equals(""))
+            price = Double.parseDouble(map.get("price").trim());
+        else
+            price = 0;
+        expireDate = map.get("expireDate");
+        condition = map.get("condition");
+        notes = map.get("notes");
     }
 }
