@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HomeInventoryApp</string>
+    <string name="app_name">Home Inventory App</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -22,4 +22,34 @@
 
     <string name="auth_failed">The email or password is incorrect</string>
     <string name="logout_string">Logout</string>
+
+
+    <!-- For the Add Item -> Location Spinner-->
+    <string name="addLocation_prompt">Choose a Location</string>
+    <string-array name="addLocation_list">
+        <item> </item>
+        <item>Living room</item>
+        <item>Family room</item>
+        <item>Study Room</item>
+        <item>Kitchen</item>
+        <item>Master Bedroom</item>
+        <item>Master Bathroom</item>
+        <item>Media Room</item>
+        <item>Bedroom 1</item>
+        <item>Bathroom 1</item>
+        <item>Garage</item>
+        <item>Patio</item>
+        <item>Front Porch</item>
+    </string-array>
+
+    <!-- For the Add Item -> Condition Spinner -->
+    <string name="addCondition_prompt">Select the item\'s condition</string>
+    <string-array name="addCondition_list">
+        <item> </item>
+        <item>Excellent</item>
+        <item>Good</item>
+        <item>Fair</item>
+        <item>Poor</item>
+    </string-array>
+
 </resources>

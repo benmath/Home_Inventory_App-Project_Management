@@ -3,7 +3,6 @@ package com.projectmanagement.benson.homeinventoryapp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,11 +12,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    private ArrayList<Item> itemList;
+    private ListAdapter itemListAdapter;
+    private ListView itemListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,19 +33,48 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         extraStuff();
+
+
     }
 
+    void attachAdapter(){
+        itemListView  = (ListView) findViewById(R.id.itemListView);
+        itemListAdapter = new ItemListAdapter(MainActivity.this, itemList);
+        itemListView.setAdapter(itemListAdapter);
+
+        itemListView.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Item item = (Item) parent.getItemAtPosition(position);
+                        //goToDetails(t);
+                    }
+                }
+        );
+    }
+
+    void populateList() {
+
+    }
+
+
+
+
+
     private void extraStuff() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_mainMenu);
         setSupportActionBar(toolbar);
 
         /*  Floating Action Bar */
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        FloatingActionButton fabAddItem = (FloatingActionButton) findViewById(R.id.fab_addItem);
+        fabAddItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                /*Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                 */
+                Intent addItem = new Intent(MainActivity.this, AddItem.class);
+                startActivity(addItem);
             }
         });
 
