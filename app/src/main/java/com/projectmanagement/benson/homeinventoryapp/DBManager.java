@@ -2,18 +2,11 @@ package com.projectmanagement.benson.homeinventoryapp;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
 
 /**
  * Created by Benson on 9/30/2016.
@@ -22,21 +15,36 @@ import java.util.Map;
 class DBManager {
 
     private DatabaseReference mDatabase;
-    private FirebaseDatabase db = FirebaseDatabase.getInstance();
-    private ChildEventListener itemFieldListener;
+    private FirebaseAuth mAuth;
     private FirebaseUser user;
 
     DBManager() {
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
+    }
+
+    public FirebaseAuth getAuth() {
+        return mAuth;
+    }
+
+    public DatabaseReference getDefaultDB() {
+        return mDatabase;
+    }
+
+    DatabaseReference getUserItemDB(){
+        return mDatabase.child("user-items").child(getUserID());
+    }
+
+    FirebaseUser getUser() {
+        return user;
     }
 
     String getUserEmail(){
         return user.getEmail();
     }
 
-    String getUserID(){
+    private String getUserID(){
         return user.getUid();
     }
 
@@ -58,7 +66,7 @@ class DBManager {
     }
 
     void updateItemToDB(Item item){
-        String key = mDatabase.child("items").push().getKey();
+        String key = mDatabase.child("user-items").push().getKey();
 
         Map<String, Object> itemValues = item.toMap();
 

@@ -2,8 +2,6 @@ package com.projectmanagement.benson.homeinventoryapp;
 
 import com.google.firebase.database.Exclude;
 
-import java.sql.Date;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,10 +23,6 @@ class Item {
     private String expireDate;
     private String condition;
     private String notes;
-
-    public Item() {
-
-    }
 
     public String getBrand() {
         return brand;
@@ -127,19 +121,7 @@ class Item {
     }
 
 
-    /*
-    private String stringToSqlDate(String date) {
-        //assuming that the dates are stored with a '/' as a delimiter
-
-        String[] s = new String[3];
-        String[] result = date.split("/");
-        System.arraycopy(result, 0, s, 0, result.length);
-
-        return s[2] + "-" + s[0] + "-" +s[1]; //yyyy-mm-dd
-    }
-    */
-
-
+    // Used in conjunction with the Firebase Database
     @Exclude
     Map<String, Object> toMap() {
         HashMap<String, Object> item = new HashMap<>();

@@ -8,13 +8,13 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class AddItem extends AppCompatActivity {
 
     private EditText et_itemName, et_brand, et_model, et_serialNum, et_type, et_locDesc, et_datePurch,
             et_price, et_expireDate, et_notes;
     private Spinner loc_spin, condition_spin;
-    private Button btn_save, btn_cancel;
     private Item item;
     private ItemController itemController;
 
@@ -30,6 +30,7 @@ public class AddItem extends AppCompatActivity {
 
     }
 
+    // connects the fields and assigns listeners
     private void connectFields() {
         et_itemName = (EditText) findViewById(R.id.et_itemName);
         et_brand = (EditText) findViewById(R.id.et_brand);
@@ -43,8 +44,8 @@ public class AddItem extends AppCompatActivity {
         et_expireDate = (EditText) findViewById(R.id.et_expireDate);
         condition_spin = (Spinner) findViewById(R.id.condition_spin);
         et_notes = (EditText) findViewById(R.id.et_notes);
-        btn_cancel = (Button) findViewById(R.id.btn_cancel);
-        btn_save = (Button) findViewById(R.id.btn_save);
+        Button btn_cancel = (Button) findViewById(R.id.btn_cancel);
+        Button btn_save = (Button) findViewById(R.id.btn_save);
 
         et_datePurch.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -79,8 +80,16 @@ public class AddItem extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getInfo();
-                save();
-                finish();
+                if (!item.getItemName().equals("")) {
+                    save();
+                    finish();
+                }
+                else {
+                    Toast.makeText(AddItem.this, "Please Insert an Item Name", Toast.LENGTH_SHORT).show();
+                    et_itemName.setError(getString(R.string.error_field_required));
+                    View focusView = et_itemName;
+                    focusView.requestFocus();
+                }
             }
         });
     }
