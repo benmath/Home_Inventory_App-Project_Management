@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.projectmanagement.benson.homeinventoryapp.UI.ViewItem"
+    tools:showIn="@layout/activity_view_item">
+
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:layout_marginLeft="26dp"
+        android:layout_marginRight="26dp"
+        android:layout_marginBottom="26dp">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/view_table_row_margin"
+            android:layout_marginBottom="@dimen/view_table_row_margin">
+
+            <TextView
+                android:text="Brand:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/view_itemBrandL"
+                android:textSize="@dimen/tv_view_textSize" />
+
+            <TextView
+                android:text="Brand Name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_view_itemBrand"
+                android:textSize="@dimen/tv_view_textSize" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/view_table_row_margin"
+            android:layout_marginBottom="@dimen/view_table_row_margin">
+
+            <TextView
+                android:text="Model:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/view_model"
+                android:textSize="@dimen/tv_view_textSize" />
+
+            <TextView
+                android:text="Model Information"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_view_model"
+                android:textSize="@dimen/tv_view_textSize" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/view_table_row_margin"
+            android:layout_marginBottom="@dimen/view_table_row_margin">
+
+            <TextView
+                android:text="Serial Number:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/view_serial"
+                android:textSize="@dimen/tv_view_textSize" />
+
+            <TextView
+                android:text="##########"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_view_serialNum"
+                android:textSize="@dimen/tv_view_textSize"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/view_table_row_margin"
+            android:layout_marginBottom="@dimen/view_table_row_margin">
+
+            <TextView
+                android:text="Type:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/view_type"
+                android:textSize="@dimen/tv_view_textSize"/>
+
+            <TextView
+                android:text="Electronic/something"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_view_type"
+                android:textSize="@dimen/tv_view_textSize"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/view_table_row_margin"
+            android:layout_marginBottom="@dimen/view_table_row_margin">
+
+            <TextView
+                android:text="Location:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/view_loc"
+                android:textSize="@dimen/tv_view_textSize"/>
+
+            <TextView
+                android:text="ROOMS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_view_loc"
+                android:textSize="@dimen/tv_view_textSize"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/view_table_row_margin"
+            android:layout_marginBottom="@dimen/view_table_row_margin">
+
+            <TextView
+                android:text="Location Description:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/view_locDesc"
+                android:textSize="@dimen/tv_view_textSize"/>
+
+        </TableRow>
+
+
+        <TextView
+            android:text="Descriptions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_view_locDesc"
+            android:layout_marginLeft="16dp"
+            android:textSize="@dimen/tv_view_textSize"/>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/view_table_row_margin"
+            android:layout_marginBottom="@dimen/view_table_row_margin"/>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/view_table_row_margin"
+            android:layout_marginBottom="@dimen/view_table_row_margin">
+
+            <TextView
+                android:text="Date Purchased:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/view_datePruch"
+                android:textSize="@dimen/tv_view_textSize"/>
+
+            <TextView
+                android:text="12/15/2016"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_view_datePurch"
+                android:textSize="@dimen/tv_view_textSize"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/view_table_row_margin"
+            android:layout_marginBottom="@dimen/view_table_row_margin">
+
+            <TextView
+                android:text="Current Value:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/view_price"
+                android:textSize="@dimen/tv_view_textSize" />
+
+            <TextView
+                android:text="$900.00"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_view_price"
+                android:textSize="@dimen/tv_view_textSize"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/view_table_row_margin"
+            android:layout_marginBottom="@dimen/view_table_row_margin">
+
+            <TextView
+                android:text="Expiration Date:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/view_expire"
+                android:textSize="@dimen/tv_view_textSize"/>
+
+            <TextView
+                android:text="1/2/03"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_view_expDate"
+                android:textSize="@dimen/tv_view_textSize"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/view_table_row_margin"
+            android:layout_marginBottom="@dimen/view_table_row_margin">
+
+            <TextView
+                android:text="Condition:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/view_cond"
+                android:textSize="@dimen/tv_view_textSize"/>
+
+            <TextView
+                android:text="Wery Nice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_view_cond"
+                android:textSize="@dimen/tv_view_textSize"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/view_table_row_margin"
+            android:layout_marginBottom="@dimen/view_table_row_margin">
+
+            <TextView
+                android:text="Notes:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/view_notes"
+                android:textSize="@dimen/tv_view_textSize"/>
+        </TableRow>
+
+
+        <TextView
+            android:text="BLAH"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_view_notes"
+            android:layout_marginLeft="16dp"
+            android:textSize="@dimen/tv_view_textSize"/>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/view_table_row_margin"
+            android:layout_marginBottom="@dimen/view_table_row_margin"/>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/view_table_row_margin"
+            android:layout_marginBottom="@dimen/view_table_row_margin"/>
+    </TableLayout>
+</android.support.v4.widget.NestedScrollView>

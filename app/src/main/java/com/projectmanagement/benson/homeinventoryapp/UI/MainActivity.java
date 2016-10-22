@@ -1,4 +1,4 @@
-package com.projectmanagement.benson.homeinventoryapp;
+package com.projectmanagement.benson.homeinventoryapp.UI;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,13 +12,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import com.google.firebase.auth.FirebaseAuth;
+import com.projectmanagement.benson.homeinventoryapp.DBManager;
+import com.projectmanagement.benson.homeinventoryapp.Models.Item;
+import com.projectmanagement.benson.homeinventoryapp.R;
+
+import java.io.Serializable;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, Serializable {
 
     private DBManager db;
 
@@ -33,9 +38,25 @@ public class MainActivity extends AppCompatActivity
 
     void populateData() {
         //list adapter using the FirebaseListAdapter
-        ListAdapter list = new ItemListAdapter(db.getUserItemDB(), this, R.layout.item_list_row);
+
+        ListAdapter list = new ItemListAdapter(db.getUserItems(), this, R.layout.item_list_row);
         ListView itemListView = (ListView) findViewById(R.id.itemListView);
+
         itemListView.setAdapter(list);
+
+        itemListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Item item = (Item) parent.getItemAtPosition(position);
+                goToItem(item);
+            }
+        });
+    }
+
+    private void goToItem(Item item) {
+        Intent viewItem = new Intent(MainActivity.this, ViewItem.class);
+        viewItem.putExtra("Item", item);
+        startActivity(viewItem);
     }
 
     @Override
@@ -53,6 +74,7 @@ public class MainActivity extends AppCompatActivity
         fabAddItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Add an item
                 Intent addItem = new Intent(MainActivity.this, AddItem.class);
                 startActivity(addItem);
             }
@@ -87,7 +109,6 @@ public class MainActivity extends AppCompatActivity
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -99,8 +120,8 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.action_settings) {
             return true;
         }
-        else if (id == R.id.logout_option){
-            FirebaseAuth.getInstance().signOut();
+        else if (id == R.id.logout_option){  // Logout option
+            db.getAuth().signOut();
             login();
             return true;
         }
@@ -120,6 +141,8 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
+        // *** RESERVED FOR FUTURE ITERATION *** //
+        /*
         if (id == R.id.nav_camera) {
             // Handle the camera action
         } else if (id == R.id.nav_gallery) {
@@ -133,6 +156,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_send) {
 
         }
+        */
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

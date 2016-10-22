@@ -1,4 +1,4 @@
-package com.projectmanagement.benson.homeinventoryapp;
+package com.projectmanagement.benson.homeinventoryapp.UI;
 
 import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +9,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.projectmanagement.benson.homeinventoryapp.DateDialog;
+import com.projectmanagement.benson.homeinventoryapp.ItemController;
+import com.projectmanagement.benson.homeinventoryapp.Models.Item;
+import com.projectmanagement.benson.homeinventoryapp.R;
 
 public class AddItem extends AppCompatActivity {
 
@@ -80,11 +85,11 @@ public class AddItem extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 getInfo();
+
                 if (!item.getItemName().equals("")) {
                     save();
                     finish();
-                }
-                else {
+                } else {
                     Toast.makeText(AddItem.this, "Please Insert an Item Name", Toast.LENGTH_SHORT).show();
                     et_itemName.setError(getString(R.string.error_field_required));
                     View focusView = et_itemName;
@@ -92,23 +97,9 @@ public class AddItem extends AppCompatActivity {
                 }
             }
         });
-    }
 
-    private void getInfo() {
-        item.setItemName(et_itemName.getText().toString().trim());
-        item.setBrand(et_brand.getText().toString().trim());
-        item.setModel(et_model.getText().toString().trim());
-        item.setSerialNumber(et_serialNum.getText().toString().trim());
-        item.setType(et_type.getText().toString().trim());
-        item.setLocDescription(et_locDesc.getText().toString());
-        item.setDatePurch(et_datePurch.getText().toString().trim());
-        if (!et_price.getText().toString().trim().equals(""))
-            item.setPrice(Double.parseDouble(et_price.getText().toString().trim()));
-        else
-            item.setPrice(0);
-        item.setExpireDate(et_expireDate.getText().toString().trim());
-        item.setNotes(et_notes.getText().toString());
-
+        assert condition_spin != null;
+        assert loc_spin != null;
         //list of locations found under strings.xml
         loc_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -136,6 +127,25 @@ public class AddItem extends AppCompatActivity {
     }
 
 
+    private void getInfo() {
+        item.setItemName(et_itemName.getText().toString().trim());
+        item.setBrand(et_brand.getText().toString().trim());
+        item.setModel(et_model.getText().toString().trim());
+        item.setSerialNumber(et_serialNum.getText().toString().trim());
+        item.setType(et_type.getText().toString().trim());
+        item.setLocDescription(et_locDesc.getText().toString());
+        item.setDatePurch(et_datePurch.getText().toString().trim());
+        if (!et_price.getText().toString().trim().equals(""))
+            item.setPrice(Double.parseDouble(et_price.getText().toString().trim()));
+        else
+            item.setPrice(0);
+        item.setExpireDate(et_expireDate.getText().toString().trim());
+        item.setNotes(et_notes.getText().toString());
+    }
+
+    /*
+        Save to the Firebase database
+     */
     private void save() {
         itemController.addItem(item);
     }

@@ -4,6 +4,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.projectmanagement.benson.homeinventoryapp.Models.Item;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,13 +13,16 @@ import java.util.Map;
  * Created by Benson on 9/30/2016.
  */
 
-class DBManager {
+public class DBManager {
 
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
     private FirebaseUser user;
 
-    DBManager() {
+    /*
+        Initialize the DB
+     */
+    public DBManager() {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
@@ -32,15 +36,15 @@ class DBManager {
         return mDatabase;
     }
 
-    DatabaseReference getUserItemDB(){
+    public DatabaseReference getUserItems(){
         return mDatabase.child("user-items").child(getUserID());
     }
 
-    FirebaseUser getUser() {
+    public FirebaseUser getUser() {
         return user;
     }
 
-    String getUserEmail(){
+    public String getUserEmail(){
         return user.getEmail();
     }
 
@@ -48,8 +52,12 @@ class DBManager {
         return user.getUid();
     }
 
+    /*
+        Adds the item to the database
+     */
     void addItemToDB(Item item) {
         DatabaseReference newItem = mDatabase.child("user-items").child(getUserID()).push();
+        item.setKey(newItem.getKey());
 
         newItem.child("itemName").setValue(item.getItemName());
         newItem.child("brand").setValue(item.getBrand());
@@ -63,17 +71,28 @@ class DBManager {
         newItem.child("expireDate").setValue(item.getExpireDate());
         newItem.child("condition").setValue(item.getCondition());
         newItem.child("notes").setValue(item.getNotes());
+        newItem.child("key").setValue(item.getKey());
+
     }
 
+    /*
+        updates the item to the DB
+     */
     void updateItemToDB(Item item){
-        String key = mDatabase.child("user-items").push().getKey();
+        //String key = mDatabase.child("user-items").child(getUserID()).getKey();
+        String key = item.getKey();
 
+        System.out.println("\nKEY: " + key);
         Map<String, Object> itemValues = item.toMap();
 
         Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put("/items/" + key, itemValues);
         childUpdates.put("/user-items/" + getUserID() + "/" + key, itemValues);
 
         mDatabase.updateChildren(childUpdates);
     }
+
+    void deleteItem(String key) {
+        mDatabase.child("user-items").child(getUserID()).child(key).removeValue();
+    }
+
 }

@@ -1,4 +1,4 @@
-package com.projectmanagement.benson.homeinventoryapp;
+package com.projectmanagement.benson.homeinventoryapp.UI;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -36,6 +36,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.AuthResult;
 import com.google.android.gms.tasks.Task;
+import com.projectmanagement.benson.homeinventoryapp.DBManager;
+import com.projectmanagement.benson.homeinventoryapp.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -114,6 +116,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private void setUpDB() {
         db = new DBManager();
 
+        // Listener to see if the user is already logged in.
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
