@@ -1,5 +1,6 @@
 package com.projectmanagement.benson.homeinventoryapp.UI;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -16,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
+import com.projectmanagement.benson.homeinventoryapp.Adapters.ItemListAdapter;
 import com.projectmanagement.benson.homeinventoryapp.DBManager;
 import com.projectmanagement.benson.homeinventoryapp.Models.Item;
 import com.projectmanagement.benson.homeinventoryapp.R;
@@ -48,21 +50,9 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Item item = (Item) parent.getItemAtPosition(position);
-                goToItem(item);
+                goToViewItem(item);
             }
         });
-    }
-
-    private void goToItem(Item item) {
-        Intent viewItem = new Intent(MainActivity.this, ViewItem.class);
-        viewItem.putExtra("Item", item);
-        startActivity(viewItem);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        populateData();
     }
 
     private void extraStuff() {
@@ -91,7 +81,28 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+    private void login() {
+        Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
+        loginIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(loginIntent);
+    }
 
+    private void goToCategories() {
+        Intent categories = new Intent(MainActivity.this, Categories.class);
+        startActivity(categories);
+    }
+
+    private void goToViewItem(Item item) {
+        Intent viewItem = new Intent(MainActivity.this, ViewItem.class);
+        viewItem.putExtra("Item", item);
+        startActivity(viewItem);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        populateData();
+    }
 
     @Override
     public void onBackPressed() {
@@ -117,22 +128,13 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        else if (id == R.id.logout_option){  // Logout option
+        if (id == R.id.logout_option){  // Logout option
             db.getAuth().signOut();
             login();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    private void login() {
-        Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
-        loginIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(loginIntent);
     }
 
     @SuppressWarnings("StatementWithEmptyBody")
@@ -142,21 +144,10 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         // *** RESERVED FOR FUTURE ITERATION *** //
-        /*
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
 
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        if (id == R.id.item_categories) {
+            goToCategories();
         }
-        */
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

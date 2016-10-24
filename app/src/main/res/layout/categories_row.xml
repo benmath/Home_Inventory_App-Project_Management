@@ -6,8 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_marginLeft="@dimen/activity_horizontal_margin"
     android:layout_marginRight="@dimen/activity_horizontal_margin"
-    android:layout_marginTop="@dimen/activity_vertical_margin"
-    android:layout_marginBottom="@dimen/activity_vertical_margin"
+    android:layout_marginTop="@dimen/card_vertical_margin"
+    android:layout_marginBottom="@dimen/card_vertical_margin"
     card_view:cardUseCompatPadding="true"
     card_view:cardElevation="4dp"
     android:id="@+id/Details_Card">
@@ -19,21 +19,22 @@
 
         <!-- User avatar -->
         <LinearLayout
-            android:layout_margin="@dimen/activity_horizontal_margin"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="24dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
                 android:text="Name"
-                android:id="@+id/tv_itemListName"
+                android:id="@+id/tv_categories_name"
                 android:layout_gravity="center_vertical"
                 android:textColor="#000000"
-                android:textIsSelectable="false"
-                android:textSize="18sp" />
+                android:textSize="@dimen/category_name_size"
+                android:textIsSelectable="false" />
 
         </LinearLayout>
     </LinearLayout>

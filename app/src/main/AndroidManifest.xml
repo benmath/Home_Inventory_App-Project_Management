@@ -26,17 +26,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".UI.AddItem"
             android:label="Add an Item" />
-
         <activity
             android:name=".UI.ViewItem"
             android:label="@string/title_activity_view_item"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".UI.EditItem"
-            android:label="@string/title_activity_editItem"/>
+            android:label="@string/title_activity_editItem" />
+        <activity
+            android:name=".UI.Categories"
+            android:label="@string/title_activity_categories"/>
+        <activity
+            android:name=".UI.Subcategories"
+            android:label="@string/title_activity_subcategories" />
+        <activity
+            android:name=".UI.ItemList"
+            android:label="@string/title_activity_item_list"/>
     </application>
 
 </manifest>

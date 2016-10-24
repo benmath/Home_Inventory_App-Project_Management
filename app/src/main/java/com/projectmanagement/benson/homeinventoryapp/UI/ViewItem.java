@@ -28,31 +28,43 @@ public class ViewItem extends AppCompatActivity implements Serializable {
         item = (Item) getIntent().getSerializableExtra("Item"); // retrieve item
         getToolbar();
 
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 goToEditItem();
             }
-        });
+        }); // edit item button
 
         connectFields();
         setInfo();
     }
 
+    /**
+     * Retrieve the Toolbar information
+     */
     private void getToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(item.getItemName());
         setSupportActionBar(toolbar);
     }
 
+    /**
+     * Navigates the user to the Edit Item Activity
+     */
     private void goToEditItem() {
         Intent editItem = new Intent(ViewItem.this, EditItem.class);
         editItem.putExtra("EditItem", item);
         startActivityForResult(editItem, 1);
     }
 
+    /**
+     * Updates the View Item Activity when the user saves and edited Item.
+     *
+     * @param requestCode   the request value when returning
+     * @param resultCode    the result code if it was successful
+     * @param data          the data being sent back
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -66,6 +78,9 @@ public class ViewItem extends AppCompatActivity implements Serializable {
             }
     }
 
+    /**
+     * Connects the fields from the XML layout resource
+     */
     private void connectFields() {
         tv_view_itemBrand = (TextView) findViewById(R.id.tv_view_itemBrand);
         tv_view_model = (TextView) findViewById(R.id.tv_view_model);
@@ -80,6 +95,9 @@ public class ViewItem extends AppCompatActivity implements Serializable {
         tv_view_notes = (TextView) findViewById(R.id.tv_view_notes);
     }
 
+    /**
+     * Prints the retrieved Item information onto the TextView fields
+     */
     private void setInfo() {
         tv_view_itemBrand.setText(item.getBrand());
         tv_view_model.setText(item.getModel());

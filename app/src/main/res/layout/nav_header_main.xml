@@ -26,6 +26,6 @@
         android:id="@+id/tv_userEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="android.studio@android.com" />
+        android:text="we still in development" />
 
 </LinearLayout>

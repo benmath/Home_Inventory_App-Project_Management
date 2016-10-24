@@ -1,4 +1,4 @@
-package com.projectmanagement.benson.homeinventoryapp.UI;
+package com.projectmanagement.benson.homeinventoryapp.Adapters;
 
 import android.app.Activity;
 import android.view.View;
@@ -16,7 +16,7 @@ import com.projectmanagement.benson.homeinventoryapp.R;
 
 public class ItemListAdapter extends FirebaseListAdapter<Item> {
 
-    ItemListAdapter(Query ref, Activity activity, int layout) {
+    public ItemListAdapter(Query ref, Activity activity, int layout) {
         super(activity, Item.class, layout, ref);
     }
 

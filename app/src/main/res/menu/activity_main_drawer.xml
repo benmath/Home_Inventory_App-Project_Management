@@ -2,28 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-    <!-- Reserved for future iterations -->
 
-    <!--
+
+
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="Import" />
-        <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
-        <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
-        <item
-            android:id="@+id/nav_manage"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:id="@+id/item_categories"
+            android:icon="@drawable/ic_list_black_24dp"
+            android:title="Categories" />
     </group>
 
+    <!-- Reserved for future iterations -->
+    <!--
     <item android:title="Communicate">
         <menu>
             <item
@@ -36,7 +26,5 @@
                 android:title="Send" />
         </menu>
     </item>
-
     -->
-
 </menu>

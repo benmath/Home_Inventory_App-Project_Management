@@ -35,13 +35,16 @@ public class EditItem extends AppCompatActivity implements Serializable {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_item);
 
-        item = (Item) getIntent().getSerializableExtra("EditItem");
+        item = (Item) getIntent().getSerializableExtra("EditItem"); // gets the Item from the View Item Activity
         itemController = new ItemController();
 
         connectFields();
         setInfo();
     }
 
+    /**
+     * Connects the XML fields and listens for the user's input.
+     */
     private void connectFields() {
         et_itemName = (EditText) findViewById(R.id.et_itemName);
         et_brand = (EditText) findViewById(R.id.et_brand);
@@ -104,6 +107,8 @@ public class EditItem extends AppCompatActivity implements Serializable {
             }
         });
 
+        // LISTENERS FOR DAYZ
+
         assert condition_spin != null;
         assert loc_spin != null;
         //list of locations found under strings.xml
@@ -132,6 +137,9 @@ public class EditItem extends AppCompatActivity implements Serializable {
         });
     }
 
+    /**
+     * Populates the EditText fields with the retrieved Item values.
+     */
     private void setInfo() {
         et_itemName.setText(item.getItemName());
         et_brand.setText(item.getBrand());
@@ -147,6 +155,13 @@ public class EditItem extends AppCompatActivity implements Serializable {
         et_notes.setText(item.getNotes());
     }
 
+    /**
+     * Retrieves the index of a spinner.
+     *
+     * @param spin  A Spinner object to analyze
+     * @param name  A String for the name to compare.
+     * @return  the index where the match occured.
+     */
     private int getSpinnerPosition(Spinner spin, String name) {
         int position = 0;
         int count = spin.getCount();
@@ -160,6 +175,9 @@ public class EditItem extends AppCompatActivity implements Serializable {
         return position;
     }
 
+    /**
+     * Updates the information from the EditText fields into the Item.
+     */
     private void getInfo() {
         item.setItemName(et_itemName.getText().toString().trim());
         item.setBrand(et_brand.getText().toString().trim());
@@ -176,27 +194,42 @@ public class EditItem extends AppCompatActivity implements Serializable {
         item.setNotes(et_notes.getText().toString());
     }
 
+    /**
+     * Updates the edited Item back into the DB
+     */
     private void save() {
         itemController.updateItem(item);
     }
 
+    /**
+     * Goes back to the previous Activity with data.
+     */
     private void goBack() {
         Intent viewItem = new Intent();
         viewItem.putExtra("ItemUpdate", item);
-        setResult(RESULT_OK, viewItem);
+        setResult(RESULT_OK, viewItem);     // must the result for the resultCode
         finish();
     }
 
+    /**
+     * Goes to the Main Activity and cannot jump back to this activity.
+     */
     private void goToMainScreen() {
         Intent main = new Intent(EditItem.this, MainActivity.class);
-        main.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        main.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // cant go back
         startActivity(main);
     }
 
+    /**
+     * Deletes the Item from the DB.
+     */
     private void deleteItem() {
         itemController.deleteItem(this.item);
     }
 
+    /**
+     * Dialog Box to confirm with the user.
+     */
     private void deleteItemDialog() {
         new AlertDialog.Builder(this)
                 .setIcon(android.R.drawable.ic_dialog_alert)
@@ -213,6 +246,12 @@ public class EditItem extends AppCompatActivity implements Serializable {
                 .show();
     }
 
+    /**
+     * Options menu - delete function.
+     *
+     * @param menu  The menu for the options.
+     * @return  true if it could be inflated.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -229,7 +268,7 @@ public class EditItem extends AppCompatActivity implements Serializable {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.menu_deleteItem) {
-            deleteItemDialog();
+            deleteItemDialog();     // deletes the item
             return true;
         }
 

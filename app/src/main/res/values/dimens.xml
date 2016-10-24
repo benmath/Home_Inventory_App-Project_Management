@@ -10,4 +10,6 @@
     <dimen name="text_margin">16dp</dimen>
     <dimen name="view_table_row_margin">16dp</dimen>
     <dimen name="tv_view_textSize">18sp</dimen>
+    <dimen name="category_name_size">24sp</dimen>
+    <dimen name="card_vertical_margin">8dp</dimen>
 </resources>
