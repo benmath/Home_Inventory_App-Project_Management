@@ -22,7 +22,7 @@ public class List implements Serializable {
     }
 
     public ArrayList<String> getListKeys() {
-        if (!keys.isEmpty())
+        if (keys != null)
             convertStringToList();
         return listKeys;
     }
@@ -48,14 +48,14 @@ public class List implements Serializable {
     }
 
     public String getKeys() {
-        if (!listKeys.isEmpty())
+        if (listKeys != null)
             convertListToString();
         return keys;
     }
 
     public void setKeys(String keys) {
         this.keys = keys;
-        if (!keys.isEmpty())
+        if (keys != null)
             convertStringToList();
     }
 

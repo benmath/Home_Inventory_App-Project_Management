@@ -50,9 +50,8 @@ public class AddList extends AppCompatActivity {
             public void onClick(View v) {
                 listKeys = list.getList();
                 listKeys.setListName(listName);
-                System.out.println(listKeys);
-                System.out.println(listName);
-                saveList();
+                if (!listKeys.getListKeys().isEmpty())
+                    saveList();
                 finish();
             }
         });
