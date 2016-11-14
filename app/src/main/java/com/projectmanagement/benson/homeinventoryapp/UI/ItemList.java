@@ -10,11 +10,16 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.projectmanagement.benson.homeinventoryapp.Adapters.ItemListAdapter;
+import com.projectmanagement.benson.homeinventoryapp.Adapters.ListItemsAdapter;
 import com.projectmanagement.benson.homeinventoryapp.ItemController;
 import com.projectmanagement.benson.homeinventoryapp.Models.Item;
+import com.projectmanagement.benson.homeinventoryapp.Models.List;
 import com.projectmanagement.benson.homeinventoryapp.R;
 
-public class ItemList extends AppCompatActivity {
+import java.io.Serializable;
+import java.util.ArrayList;
+
+public class ItemList extends AppCompatActivity implements Serializable{
 
     private ItemController control; // used for Controller functions
 
@@ -37,20 +42,26 @@ public class ItemList extends AppCompatActivity {
         getSupportActionBar().setTitle(name);
     }
 
-    /**
-     * Displays the Items from a subcategory
-     */
     private void displayItems() {
         String subcategories = getIntent().getStringExtra("Subcategory");
         String categories = getIntent().getStringExtra("Category");
+        List listName = (List) getIntent().getSerializableExtra("ListName");
 
+        if (listName != null)
+            displayListItems(listName);
+        else if (!subcategories.isEmpty() && !categories.isEmpty())
+            displaySubcategoryItems(subcategories, categories);
+
+    }
+
+    /**
+     * Displays the Items from a subcategory
+     */
+    private void displaySubcategoryItems(String subcategories, String categories) {
         changeToolbarText(subcategories);
 
         ListAdapter list = new ItemListAdapter(control.findSubcategoryItems(categories, subcategories),
                 this, R.layout.item_list_row);
-
-        System.out.println("list count: " + list.getCount());
-
         ListView itemListView = (ListView) findViewById(R.id.item_list_view);
 
         try {
@@ -67,6 +78,23 @@ public class ItemList extends AppCompatActivity {
             System.err.print(e.getMessage());
             Toast.makeText(this, "No Items Found :(", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void displayListItems(List itemList) {
+        changeToolbarText(itemList.getListName());
+        ArrayList<Item> items = control.getListItems(itemList);
+
+        ListAdapter adapter = new ListItemsAdapter(this, items);
+        ListView categoryListView = (ListView) findViewById(R.id.item_list_view);
+
+        categoryListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Item item = (Item) parent.getItemAtPosition(position);
+                goToViewItem(item);
+            }
+        });
+        categoryListView.setAdapter(adapter);
     }
 
     /**

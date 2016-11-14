@@ -7,7 +7,9 @@ package com.projectmanagement.benson.homeinventoryapp;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 import com.projectmanagement.benson.homeinventoryapp.Models.Item;
+import com.projectmanagement.benson.homeinventoryapp.Models.List;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -17,7 +19,7 @@ public class ItemController {
 
     private DBManager db;
 
-    /*  Strings for the Categories      */
+    /*       Strings for the Categories      */
     private final static String LOCATION = "Location";
     private final static String TYPE = "Type";
     private final static String CURRENT_VALUE = "Current Value";
@@ -58,7 +60,7 @@ public class ItemController {
      *
      * @return A databaseReference that points to the user's Items.
      */
-    private DatabaseReference getUserItems() {
+    public DatabaseReference getUserItems() {
         return db.getUserItems();
     }
 
@@ -164,6 +166,10 @@ public class ItemController {
         return list;
     }
 
+    public void addList(List list) {
+        db.addListToDB(list);
+    }
+
     /**
      * Queries the DB for the Subcategory Items.
      *
@@ -186,9 +192,20 @@ public class ItemController {
                 category = "price";
                 break;
         }
-        
+
         return getUserItems().orderByChild(category).equalTo(subcategory);
     }
 
+    public Query findListItems(List list) {
+        return db.getUserListNames().equalTo(list.getListName());
+    }
+
+    public Query findListNames() {
+        return db.getUserListNames();
+    }
+
+    public ArrayList<Item> getListItems(List list) {
+        return db.getListItems(list);
+    }
 }
 

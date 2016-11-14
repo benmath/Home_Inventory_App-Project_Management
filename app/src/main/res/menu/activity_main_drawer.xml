@@ -10,6 +10,10 @@
             android:id="@+id/item_categories"
             android:icon="@drawable/ic_list_black_24dp"
             android:title="Categories" />
+        <item
+            android:id="@+id/item_lists"
+            android:icon="@drawable/ic_view_list_black_18dp"
+            android:title="Lists" />
     </group>
 
     <!-- Reserved for future iterations -->

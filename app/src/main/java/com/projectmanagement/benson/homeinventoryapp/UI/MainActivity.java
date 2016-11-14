@@ -19,6 +19,7 @@ import android.widget.ListView;
 
 import com.projectmanagement.benson.homeinventoryapp.Adapters.ItemListAdapter;
 import com.projectmanagement.benson.homeinventoryapp.DBManager;
+import com.projectmanagement.benson.homeinventoryapp.ItemController;
 import com.projectmanagement.benson.homeinventoryapp.Models.Item;
 import com.projectmanagement.benson.homeinventoryapp.R;
 
@@ -27,21 +28,21 @@ import java.io.Serializable;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, Serializable {
 
-    private DBManager db;
+    private ItemController control;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        db = new DBManager();
+        control = new ItemController();
         extraStuff();
     }
 
     void populateData() {
         //list adapter using the FirebaseListAdapter
 
-        ListAdapter list = new ItemListAdapter(db.getUserItems(), this, R.layout.item_list_row);
+        ListAdapter list = new ItemListAdapter(control.getUserItems(), this, R.layout.item_list_row);
         ListView itemListView = (ListView) findViewById(R.id.itemListView);
 
         itemListView.setAdapter(list);
@@ -92,6 +93,11 @@ public class MainActivity extends AppCompatActivity
         startActivity(categories);
     }
 
+    private void goToViewLists() {
+        Intent lists = new Intent(MainActivity.this, ViewLists.class);
+        startActivity(lists);
+    }
+
     private void goToViewItem(Item item) {
         Intent viewItem = new Intent(MainActivity.this, ViewItem.class);
         viewItem.putExtra("Item", item);
@@ -127,9 +133,11 @@ public class MainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+
+
         //noinspection SimplifiableIfStatement
         if (id == R.id.logout_option){  // Logout option
-            db.getAuth().signOut();
+            new DBManager().getAuth().signOut();
             login();
             return true;
         }
@@ -145,9 +153,10 @@ public class MainActivity extends AppCompatActivity
 
         // *** RESERVED FOR FUTURE ITERATION *** //
 
-        if (id == R.id.item_categories) {
+        if (id == R.id.item_categories)
             goToCategories();
-        }
+        else if (id == R.id.item_lists)
+            goToViewLists();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

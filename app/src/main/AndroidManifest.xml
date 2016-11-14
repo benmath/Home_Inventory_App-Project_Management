@@ -26,7 +26,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".UI.AddItem"
             android:label="Add an Item" />
@@ -39,13 +38,22 @@
             android:label="@string/title_activity_editItem" />
         <activity
             android:name=".UI.Categories"
-            android:label="@string/title_activity_categories"/>
+            android:label="@string/title_activity_categories" />
         <activity
             android:name=".UI.Subcategories"
             android:label="@string/title_activity_subcategories" />
         <activity
             android:name=".UI.ItemList"
-            android:label="@string/title_activity_item_list"/>
+            android:label="@string/title_activity_item_list" />
+        <activity
+            android:name=".UI.ViewLists"
+            android:label="@string/title_activity_view_lists"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".UI.EditList"
+            android:label="@string/title_activity_edit_list"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".UI.AddList"></activity>
     </application>
 
 </manifest>

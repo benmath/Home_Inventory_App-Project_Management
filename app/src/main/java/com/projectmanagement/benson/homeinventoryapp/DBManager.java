@@ -1,12 +1,19 @@
 package com.projectmanagement.benson.homeinventoryapp;
 
+import android.support.annotation.NonNull;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.projectmanagement.benson.homeinventoryapp.Models.Item;
+import com.projectmanagement.benson.homeinventoryapp.Models.List;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -78,6 +85,7 @@ public class DBManager {
      * The user's unique ID.
      * @return the user's unique Firebase ID.
      */
+    @NonNull
     private String getUserID(){
         return user.getUid();
     }
@@ -104,7 +112,6 @@ public class DBManager {
         newItem.child("condition").setValue(item.getCondition());
         newItem.child("notes").setValue(item.getNotes());
         newItem.child("key").setValue(item.getKey());
-
     }
 
     /**
@@ -131,4 +138,45 @@ public class DBManager {
         mDatabase.child(getUserID()).child("Items").child(key).removeValue();
     }
 
+    DatabaseReference getUserListNames() {
+        return mDatabase.child(getUserID()).child("Lists");
+    }
+
+    ArrayList<Item> getListItems(List list) {
+        final ArrayList<Item> itemList = new ArrayList<>();
+
+        for (String s : list.getListKeys()) {
+            Query ref = getUserItems().orderByKey().equalTo(s);
+
+            ref.addChildEventListener(new ChildEventListener() {
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                    itemList.add(dataSnapshot.getValue(Item.class));
+                }
+
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                }
+
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) {
+                }
+
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                }
+            });
+        }
+        return itemList;
+    }
+
+    void addListToDB(List list) {
+        DatabaseReference newList = mDatabase.child(getUserID()).child("Lists").child(list.getListName());
+        newList.child("listName").setValue(list.getListName());
+        newList.child("keys").setValue(list.getKeys());
+    }
 }
