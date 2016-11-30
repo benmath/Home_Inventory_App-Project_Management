@@ -148,5 +148,6 @@
     </string>
     <string name="title_activity_view_lists">ViewLists</string>
     <string name="title_activity_edit_list">EditList</string>
+    <string name="title_activity_view_list_items">ViewListItems</string>
 
 </resources>

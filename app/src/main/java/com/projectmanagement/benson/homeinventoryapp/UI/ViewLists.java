@@ -47,6 +47,9 @@ public class ViewLists extends AppCompatActivity implements Serializable {
         displayListNames();
     }
 
+    /**
+     * Displays all the created lists from the DB
+     */
     private void displayListNames() {
         ListAdapter list = new ListNameAdapter(control.findListNames(), this, R.layout.categories_row);
         ListView itemListView = (ListView) findViewById(R.id.item_list_view);
@@ -58,7 +61,7 @@ public class ViewLists extends AppCompatActivity implements Serializable {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     List list = (List) parent.getItemAtPosition(position);
-                    goToItemList(list);
+                    goToViewListItem(list);
                 }
             });
         } catch (NullPointerException e) {
@@ -67,6 +70,9 @@ public class ViewLists extends AppCompatActivity implements Serializable {
         }
     }
 
+    /**
+     * Creates an Add List Dialog Box to input and validate the list name.
+     */
     private void addListDialogBox() {
         final EditText editText = new EditText(this);
         editText.setHint("Enter List Name");
@@ -99,6 +105,12 @@ public class ViewLists extends AppCompatActivity implements Serializable {
 
     private void goToItemList(List list) {
         Intent itemList = new Intent(this, ItemList.class);
+        itemList.putExtra("ListName", list);
+        startActivity(itemList);
+    }
+
+    private void goToViewListItem(List list) {
+        Intent itemList = new Intent(this, ViewListItems.class);
         itemList.putExtra("ListName", list);
         startActivity(itemList);
     }

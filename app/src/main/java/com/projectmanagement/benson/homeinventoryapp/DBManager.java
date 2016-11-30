@@ -179,4 +179,18 @@ public class DBManager {
         newList.child("listName").setValue(list.getListName());
         newList.child("keys").setValue(list.getKeys());
     }
+
+    void updateListToDB(List list) {
+        String listName = list.getListName();
+        Map<String, String> listValues = list.toMap();
+        Map<String, Object> childUpdates = new HashMap<>();
+
+        childUpdates.put(getUserID() + "/Lists/" + listName, listValues);
+
+        mDatabase.updateChildren(childUpdates);
+    }
+
+    void deleteList(String name) {
+        mDatabase.child(getUserID()).child("Lists").child(name).removeValue();
+    }
 }

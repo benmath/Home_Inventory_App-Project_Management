@@ -153,9 +153,9 @@ public class MainActivity extends AppCompatActivity
 
         // *** RESERVED FOR FUTURE ITERATION *** //
 
-        if (id == R.id.item_categories)
+        if (id == R.id.item_categories)     // for categories
             goToCategories();
-        else if (id == R.id.item_lists)
+        else if (id == R.id.item_lists)     // for lists
             goToViewLists();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

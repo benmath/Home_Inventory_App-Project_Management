@@ -170,6 +170,14 @@ public class ItemController {
         db.addListToDB(list);
     }
 
+    public void updateList(List list) {
+        db.updateListToDB(list);
+    }
+
+    public void deleteList(List list) {
+        db.deleteList(list.getListName());
+    }
+
     /**
      * Queries the DB for the Subcategory Items.
      *

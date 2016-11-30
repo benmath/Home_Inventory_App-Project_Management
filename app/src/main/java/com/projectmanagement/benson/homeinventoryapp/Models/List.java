@@ -43,8 +43,7 @@ public class List implements Serializable {
         listKeys.add(key);
     }
 
-    public void removeKey(String key) {
-        listKeys.remove(listKeys.indexOf(key));
+    public void removeKey(String key) {        listKeys.remove(listKeys.indexOf(key));
     }
 
     public String getKeys() {

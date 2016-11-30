@@ -112,4 +112,10 @@ public class ViewItem extends AppCompatActivity implements Serializable {
         tv_view_notes.setText(item.getNotes());
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent viewItem = new Intent();
+        setResult(RESULT_OK, viewItem);     // must the result for the resultCode
+        super.onBackPressed();
+    }
 }

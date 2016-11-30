@@ -53,7 +53,11 @@
             android:name=".UI.EditList"
             android:label="@string/title_activity_edit_list"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".UI.AddList"></activity>
+        <activity android:name=".UI.AddList" />
+        <activity
+            android:name=".UI.ViewListItems"
+            android:label="@string/title_activity_view_list_items"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

@@ -17,9 +17,9 @@ import java.util.ArrayList;
 
 public class AddList extends AppCompatActivity {
 
-    private String listName;
-    private List listKeys;
-    private CheckItemListAdapter list;
+    private String listName;    // name of the list
+    private List listKeys;      // A list of item keys (references)
+    private CheckItemListAdapter list;  // used to extract the selected keys
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,12 +28,13 @@ public class AddList extends AppCompatActivity {
 
         listName = getIntent().getStringExtra("ListName");
 
-
         buttons();
         displayAllItems();
-
     }
 
+    /**
+     * Associates and implements the save and cancel buttons from the layout.
+     */
     private void buttons() {
         Button btn_cancel = (Button) findViewById(R.id.btn_cancel);
         Button btn_save = (Button) findViewById(R.id.btn_save);
@@ -48,20 +49,26 @@ public class AddList extends AppCompatActivity {
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listKeys = list.getList();
+                listKeys = list.getList();      // extracts the selected keys
                 listKeys.setListName(listName);
-                if (!listKeys.getListKeys().isEmpty())
+                if (!listKeys.getListKeys().isEmpty())    // only save the list if it is not empty
                     saveList();
                 finish();
             }
         });
     }
 
+    /**
+     * Saves the list of listKeys
+     */
     private void saveList() {
         ItemController c = new ItemController();
         c.addList(listKeys);
     }
 
+    /**
+     * Displays all the items on to a ListView using a custom adapter
+     */
     private void displayAllItems() {
         ItemController control = new ItemController();
 
