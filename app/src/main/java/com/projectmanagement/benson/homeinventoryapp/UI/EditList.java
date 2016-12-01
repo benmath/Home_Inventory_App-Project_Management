@@ -16,7 +16,9 @@ import com.projectmanagement.benson.homeinventoryapp.ItemController;
 import com.projectmanagement.benson.homeinventoryapp.Models.List;
 import com.projectmanagement.benson.homeinventoryapp.R;
 
-public class EditList extends AppCompatActivity {
+import java.io.Serializable;
+
+public class EditList extends AppCompatActivity implements Serializable {
 
     private CheckItemListAdapter list;  // used to extract the selected keys
     private List listItems;
@@ -63,7 +65,7 @@ public class EditList extends AppCompatActivity {
                 listItems.setListName(listName);
                 if (!listItems.getListKeys().isEmpty())    // only save the list if it is not empty
                     updateList();
-                finish();
+                goToViewLists();
             }
         });
     }
@@ -92,5 +94,19 @@ public class EditList extends AppCompatActivity {
      */
     private void updateList() {
         control.updateList(listItems);
+    }
+
+    private void goBack() {
+        Intent viewItem = new Intent();
+        viewItem.putExtra("ListUpdate", listItems);
+        System.out.println("LIST: " + listItems.getListKeys());
+        setResult(RESULT_OK, viewItem);     // must the result for the resultCode
+        finish();
+    }
+
+    private void goToViewLists() {
+        Intent viewLists = new Intent(this, ViewLists.class);
+        startActivity(viewLists);
+        finish();
     }
 }

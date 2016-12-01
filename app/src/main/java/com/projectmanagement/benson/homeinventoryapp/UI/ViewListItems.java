@@ -21,14 +21,13 @@ import com.projectmanagement.benson.homeinventoryapp.Models.Item;
 import com.projectmanagement.benson.homeinventoryapp.Models.List;
 import com.projectmanagement.benson.homeinventoryapp.R;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ViewListItems extends AppCompatActivity {
+public class ViewListItems extends AppCompatActivity implements Serializable{
 
     private ItemController control;
-    private  ArrayList<Item> items;
     private ArrayAdapter adapter;
-    private ListView categoryListView;
     private List listName;
 
     @Override
@@ -63,19 +62,19 @@ public class ViewListItems extends AppCompatActivity {
     }
 
     private void displayListItems(List itemList) {
-        items = control.getListItems(itemList);
+        ArrayList<Item> items = control.getListItems(itemList);
 
         adapter = new ListItemsAdapter(this, items);
-        categoryListView = (ListView) findViewById(R.id.item_list_view);
+        ListView listView = (ListView) findViewById(R.id.item_list_view);
 
-        categoryListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Item item = (Item) parent.getItemAtPosition(position);
                 goToViewItem(item);
             }
         });
-        categoryListView.setAdapter(adapter);
+        listView.setAdapter(adapter);
     }
 
     private void goToViewItem(Item item) {
@@ -87,6 +86,7 @@ public class ViewListItems extends AppCompatActivity {
     private void goToEditList(List list) {
         Intent editList = new Intent(ViewListItems.this, EditList.class);
         editList.putExtra("List", list);
+        // startActivityForResult(editList, 1);     // maybe later ._.
         startActivity(editList);
     }
 
@@ -96,16 +96,18 @@ public class ViewListItems extends AppCompatActivity {
         startActivity(main);
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-       super.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
 
-       adapter.notifyDataSetChanged();
+        if (requestCode == 1)
+            if (resultCode == RESULT_OK) {
+                adapter.notifyDataSetChanged();
+            }
     }
 
     /**
-     * Deletes the Item from the DB.
+     * Deletes the List from the DB.
      */
     private void deleteList() {
         control.deleteList(listName);
