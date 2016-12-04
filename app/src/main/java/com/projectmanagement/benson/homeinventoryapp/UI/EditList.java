@@ -65,7 +65,7 @@ public class EditList extends AppCompatActivity implements Serializable {
                 listItems.setListName(listName);
                 if (!listItems.getListKeys().isEmpty())    // only save the list if it is not empty
                     updateList();
-                goToViewLists();
+                goBack();
             }
         });
     }
@@ -97,10 +97,9 @@ public class EditList extends AppCompatActivity implements Serializable {
     }
 
     private void goBack() {
-        Intent viewItem = new Intent();
-        viewItem.putExtra("ListUpdate", listItems);
-        System.out.println("LIST: " + listItems.getListKeys());
-        setResult(RESULT_OK, viewItem);     // must the result for the resultCode
+        Intent viewListItems = new Intent(this, ViewListItems.class);
+        viewListItems.putExtra("ListName", listItems);
+        startActivity(viewListItems);
         finish();
     }
 

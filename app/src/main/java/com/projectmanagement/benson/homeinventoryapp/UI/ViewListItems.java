@@ -88,6 +88,7 @@ public class ViewListItems extends AppCompatActivity implements Serializable{
         editList.putExtra("List", list);
         // startActivityForResult(editList, 1);     // maybe later ._.
         startActivity(editList);
+        finish();
     }
 
     private void goToMainScreen() {
